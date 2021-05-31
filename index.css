@@ -1,0 +1,65 @@
+@function light-dark($light, $dark) {
+    @return var(--light, #{ $light }) var(--dark, #{ $dark });
+  }
+  
+  :root {
+    --ON: initial;
+    --OFF: ;
+  }
+  
+  .theme-default,
+  .theme-light {
+    --light: var(--ON);
+    --dark: var(--OFF);
+  }
+  
+  .theme-dark {
+    --light: var(--OFF);
+    --dark: var(--ON);
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .theme-default {
+      --light: var(--OFF);
+      --dark: var(--ON);
+    }
+  }
+  
+  :root {
+    $light-link: navy;
+    $dark-link: gold;
+    
+    /* Define each variable in their light and dark mode */
+    --text: #{ light-dark(black, white) };
+    --bg: #{ light-dark(grey, yellow) };
+    --accent: #{ light-dark(mix(grey, black), mix(yellow, white)) };
+    --link: #{ light-dark($light-link, $dark-link) };
+  }
+  
+  body {
+    color: var(--text, black);
+    background: var(--bg, white);
+  }
+  
+  body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+  }
+  
+  main {
+    text-align: center;
+  }
+  
+  button {
+    width: 100%;
+  }
+  
+  p {
+    padding: 1em;
+    border: 0.5em solid var(--accent, #808080);
+  }
+  
+  a:any-link {
+    color: var(--link, blue);
+  }
